@@ -1,0 +1,12 @@
+{
+  "name": "web-components",
+  "version": "1.0.0",
+  "description": "Learning web components",
+  "main": "index.js",
+  "author": "Tony G. Bolaño",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "http-server": "^0.12.0"
+  }
+}
