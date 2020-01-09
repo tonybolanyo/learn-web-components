@@ -8,18 +8,27 @@
 
     <script>
       class PolySearch extends HTMLElement {
-        // We don't need this, we doit with attributeChangedCalback
-        // connectedCallback() {
-        //   this.doSearch();
-        // }
+        connectedCallback() {
+          if (this.hasAttribute("thumbheight")) {
+            this._thumbheight = this.getAttribute("thumbheight");
+            this._thumbwidth = this._thumbheight * 1.3333; // Aspect ratio
+          } else {
+            this._thumbheight = 150;
+            this._thumbwidth = 200;
+          }
+
+          if (this.hasAttribute("backgroundcolor")) {
+            this.style.backgroundColor = this.getAttribute("backgroundcolor");
+          }
+        }
 
         static get observedAttributes() {
-          return ["searchterm"];
+          return ["searchterm", "thumbheight"];
         }
 
         attributeChangedCallback(name, oldval, newval) {
           console.log("attributeChangedCallback");
-          if (name === "searchterm") {
+          if (name === "searchterm" || name === "thumbheight") {
             this.doSearch();
           }
         }
@@ -27,9 +36,12 @@
         doSearch() {
           if (this.getAttribute("apikey") && this.getAttribute("searchterm")) {
             const url =
-              "https://poly.googleapis.com/v1/assets?keywords=" +
+              this.getAttribute("baseuri") +
+              "?keywords=" +
               this.getAttribute("searchterm") +
-              "&format=OBJ&key=" +
+              "&format=" +
+              this.getAttribute("format") +
+              "&key=" +
               this.getAttribute("apikey");
             const request = new XMLHttpRequest();
             request.open("GET", url, true);
@@ -41,14 +53,18 @@
         }
 
         renderResults(assets) {
-          console.log("renderResults");
+          console.log("renderResults", this._thumbheight, this._thumbwidth);
           // Method 1
           let html = "";
           for (let c = 0; c < assets.length; c++) {
             html +=
               '<img src="' +
               assets[c].thumbnail.url +
-              '" width="200" height="150">';
+              '" width="' +
+              this._thumbwidth +
+              '" height="' +
+              this._thumbheight +
+              '">';
           }
           this.innerHTML = html;
 
@@ -60,7 +76,6 @@
           //   this.appendChild(img);
           // }
         }
-
       }
 
       if (!customElements.get("poly-search")) {
@@ -103,6 +118,10 @@
     <br />
     <poly-search
       apikey="AIzaSyAoNOLaIdKF5HCoqZpWgcyiJV0Z-rXs60s"
+      format="OBJ"
+      thumbheight="50"
+      backgroundcolor="red"
+      baseuri="https://poly.googleapis.com/v1/assets"
       searchterm="parrot"
     ></poly-search>
   </body>
