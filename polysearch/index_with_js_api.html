@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Search Google Poly API</title>
+
+    <script>
+      class PolySearch extends HTMLElement {
+        connectedCallback() {
+          this.doSearch();
+        }
+
+        doSearch() {
+          if (this._apiKey && this._searchTerm) {
+            const url =
+              "https://poly.googleapis.com/v1/assets?keywords=" +
+              this._searchTerm +
+              "&format=OBJ&key=" +
+              this._apiKey;
+            const request = new XMLHttpRequest();
+            request.open("GET", url, true);
+            request.addEventListener("load", event => {
+              this.renderResults(JSON.parse(event.target.response).assets);
+            });
+            request.send();
+          }
+        }
+
+        renderResults(assets) {
+          // Method 1
+          let html = "";
+          for (let c = 0; c < assets.length; c++) {
+            html +=
+              '<img src="' +
+              assets[c].thumbnail.url +
+              '" width="200" height="150">';
+          }
+          this.innerHTML = html;
+
+          // Method 2
+          // Make refresh DOM in every request
+          // for (let c=0; c < assets.length; c++) {
+          //   const img = document.createElement('img');
+          //   img.src = assets[c].thumbnail.url;
+          //   this.appendChild(img);
+          // }
+        }
+
+        set apiKey(value) {
+          this._apiKey = value;
+          this.doSearch();
+        }
+
+        set searchTerm(value) {
+          this._searchTerm = value;
+          this.doSearch();
+        }
+
+        // Not needed
+        // get searchTerm() {
+        //   return this._searchTerm;
+        // }
+      }
+
+      if (!customElements.get("poly-search")) {
+        customElements.define("poly-search", PolySearch);
+      }
+    </script>
+
+    <style>
+      poly-search {
+        border-style: solid;
+        border-width: 1px;
+        border-color: #9a9a9a;
+        padding: 10px;
+        background-color: #fafafa;
+        display: inline-block;
+        text-align: center;
+      }
+
+      poly-search img {
+        margin: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <poly-search></poly-search>
+  </body>
+  <script>
+    document.querySelector("poly-search").apiKey =
+      "AIzaSyAoNOLaIdKF5HCoqZpWgcyiJV0Z-rXs60s";
+    document.querySelector("poly-search").searchTerm = "parrot";
+  </script>
+</html>
