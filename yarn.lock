@@ -98,6 +98,11 @@ lodash@^4.17.14:
   resolved "http://tecnonp.gitlab.movisat.com:4873/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
   integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
 
+midi.js@^0.3.1:
+  version "0.3.1"
+  resolved "http://tecnonp.gitlab.movisat.com:4873/midi.js/-/midi.js-0.3.1.tgz#cb092a665f1c3c57aee6a92654187bcdd3151658"
+  integrity sha1-ywkqZl8cPFeu5qkmVBh7zdMVFlg=
+
 mime@^1.6.0:
   version "1.6.0"
   resolved "http://tecnonp.gitlab.movisat.com:4873/mime/-/mime-1.6.0.tgz#32cd9e5c64553bd58d19a568af452acff04981b1"

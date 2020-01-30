@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "csshake": "^1.5.3",
-    "dotenv": "^8.2.0"
+    "dotenv": "^8.2.0",
+    "midi.js": "^0.3.1"
   }
 }

@@ -8,8 +8,17 @@
   <script type="module" src="./components/app/app.js"></script>
   <link rel="stylesheet" href="../node_modules/csshake/dist/csshake.min.css">
   <link rel="stylesheet" href="./main.css">
+  <script>
+    function clicktostart() {
+      document.querySelector('.audio-fix').style.display = 'none';
+      document.querySelector('webharp-app').style.display = 'inline-block'
+    }
+  </script>
 </head>
 <body>
   <webharp-app strings="12"></webharp-app>
+  <div class="audio-fix" onclick="clicktostart()">
+    Click Me To Start
+  </div>
 </body>
 </html>
