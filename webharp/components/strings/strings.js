@@ -4,10 +4,10 @@ export default class WebHarpStrings extends HTMLElement {
   connectedCallback() {
     let strings = '<div class="spacer"></div>';
     for (let c=0; c<this.getAttribute('strings'); c++) {
-      strings += `<webharp-string></webarp-string>`;
+      strings += `<webharp-string></webharp-string>`;
     }
     strings += '<style>\
-      webharp-string {\
+      webharp-strings {\
         height: 100%;\
         display: flex;\
       }\
