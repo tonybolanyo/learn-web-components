@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script>
+    class MyCustomTag extends HTMLElement {
+
+      constructor() {
+        super();
+        alert('hi from MyCustomTags constructor');
+      }
+
+      connectedCallback() {
+        alert('hi from MyCustomTag');
+
+      this.innerHTML = '<h2>' + this.getAttribute('title') +
+        '</h2><button>click me</button>';
+      }
+    }
+
+    if (!customElements.get('my-custom-tag')) {
+      customElements.define('my-custom-tag', MyCustomTag);
+    }
+  </script>
+
+  <style>
+    my-custom-tag {
+      background-color: blue;
+      padding: 20px;
+      display: inline-block;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <!-- <my-custom-tag title="Another title"></my-custom-tag> -->
+</body>
+</html>

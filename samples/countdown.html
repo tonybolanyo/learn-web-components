@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script>
+    class CleanupComponent extends HTMLElement {
+      connectedCallback() {
+        this.counter = 100;
+        this.timer = setInterval(() => this.update(), 1000);
+      }
+
+      update() {
+        this.innerHTML = this.counter;
+        this.counter --;
+        console.log(this.counter);
+      }
+
+      disconnectedCallback() {
+        clearInterval(this.timer);
+      }
+    }
+
+    if (!customElements.get('cleanup-component')) {
+      customElements.define('cleanup-component', CleanupComponent);
+    }
+  </script>
+</head>
+<body>
+  <cleanup-component></cleanup-component>
+  <button onclick="document.body.removeChild(document.querySelector('cleanup-component'))">remove</button>
+</body>
+</html>
