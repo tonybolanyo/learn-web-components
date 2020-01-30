@@ -1,7 +1,28 @@
 export default class WebHarpString extends HTMLElement {
-  strum(params) {}
+  strum(params) {
+    if (this.timer) {
+      clearTimeout(this.timer);
+    }
+    
+    let dur = params.power * 10 + 250;
+    this.classList.add(
+      'shake',
+      'shake-constant',
+      'shake-horizontal'
+    );
+    if (dur < 500) {
+      this.classList.add('shake-little');
+    }
+    this.timer = setTimeout(
+      () => this.stopStrum(), dur
+    );
+    console.log(params);
+  }
 
-  stopStrum() {}
+  stopStrum() {
+    this.classList.remove(
+      'shake', 'shake-constant', 'shake-horizontal', 'shake-little')
+  }
 
   connectedCallback() {
     this.innerHTML = '\
