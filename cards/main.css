@@ -1,0 +1,52 @@
+/* RESET */
+*, *:after, *:before {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+  }
+  
+/* VARIABLES */
+  :root {
+    --font-size: 16px;
+    --bg-color: #0f0c29;
+    --text-color: #EFEFEF;
+    --brand-color: rgb(255, 215, 0);
+    --brand-overlay: var(--bg-color);
+    --alt-color: #3388FF;
+    --border-color: #EFEFEF;
+    --border-radius: 5px;
+
+    --screen-sm-min: 576px;
+    --screen-md-min: 768px;
+    --screen-lg-min: 992px;
+    --screen-xl-min: 1200px;
+
+    /* margen 1rem * 2 + letra logo 2.5rem = 4.5rem */
+    --header-height: 5rem;
+}
+
+/* COMMON */
+@import url('https://fonts.googleapis.com/css?family=Libre+Franklin:200,400,700&display=swap');
+
+body {
+    font-family: 'Libre Franklin', Arial, Helvetica, sans-serif;
+    font-size: var(--font-size);
+    font-weight: 400;
+    color: var(--text-color);
+    background: var(--bg-color);  /* fallback for old browsers */
+    background: fixed -webkit-linear-gradient(to bottom, #24243e, #302b63, var(--bg-color));  /* Chrome 10-25, Safari 5.1-6 */
+    background: fixed linear-gradient(to bottom, #24243e, #302b63, var(--bg-color)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+a {
+    color: var(--brand-color);
+    text-decoration: none;
+}
+
+/* Ninguna imagen mayor que el ancho de pantalla */
+img {
+    max-width: 100%;
+}
